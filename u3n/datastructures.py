@@ -35,6 +35,7 @@ class H11Request:
 
     @classmethod
     def from_raw_data(cls, raw_request_data: bytes) -> H11Request:
+        # TODO: enforce this against invalid HTTP requests
         request_data = raw_request_data.decode("ascii")
         request_parts = request_data.split("\r\n")
         iter_parts = iter(request_parts)

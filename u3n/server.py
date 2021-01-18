@@ -10,11 +10,11 @@ from .request_handlers import FSBrowserRequestHandler
 class HttpServer:
     def __init__(
         self,
-        chroot_path: Optional[str] = None,
+        chroot_path: Optional[Path] = None,
         host: str = "127.0.0.1",
         port: int = 8000,
     ):
-        self.chroot_path = Path.cwd() if chroot_path is None else Path(chroot_path)
+        self.chroot_path = Path.cwd() if chroot_path is None else chroot_path
         self.host = host
         self.port = port
 
@@ -31,7 +31,7 @@ class HttpServer:
         )
         server = loop.run_until_complete(server_coroutine)
 
-        print(f"Serving file at: http://{self.host}:{self.port}")
+        print(f"Serving files at: http://{self.host}:{self.port}")
         try:
             loop.run_forever()
         except KeyboardInterrupt:

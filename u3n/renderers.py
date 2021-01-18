@@ -29,6 +29,13 @@ class FileContainer(TypedDict):
 
 
 class AbstractRenderer(ABC):
+    """Abstract renderer for FSBrowserRequestHandler.
+
+    You must subclass it and implements render_directory, render_file and
+    render_not_found to use it.
+
+    It already provides utils methods like get_directory_listing and get_file_info.
+    """
     __slots__ = ("chroot_path", "relative_requested_path", "action")
 
     def __init__(
@@ -126,6 +133,10 @@ class AbstractRenderer(ABC):
 
 
 class BasicHtmlRenderer(AbstractRenderer):
+    """Render directories with a pure (basic) HTML interface.
+    It offers a direct download button to download files as attachment.
+    """
+
     def render_directory(self, directory_listing: list[ListingItem]) -> H11Response:
         rows = []
         for item in directory_listing:

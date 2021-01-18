@@ -10,6 +10,7 @@ class H11Protocol(asyncio.Protocol):
     def __init__(
         self, request_handler: Callable[[H11Request], Awaitable[H11Response]], loop=None
     ):
+        # TODO: implement proper ASGI support
         self.request_handler = request_handler
         self.transport: Optional[transports.Transport] = None
         self.loop = loop or asyncio.get_event_loop()
@@ -25,6 +26,7 @@ class H11Protocol(asyncio.Protocol):
         try:
             response = await self.request_handler(request)
         except Exception as e:  # noqa
+            # TODO: define a proper logging strategy
             print(e)
             response = H11Response(
                 status_code=HttpStatusCode.INTERNAL_SERVER_ERROR,
