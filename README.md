@@ -2,6 +2,10 @@
 
 The main goal of this project is discovering asyncio and the little jewels of the stdlib.
 
+## Requirements
+
+- Python 3.9+
+
 
 ## Usage (dev)
 
